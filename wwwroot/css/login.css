@@ -1,0 +1,87 @@
+﻿body {
+    background-color: #f4f8fb; /* Light background for the whole page */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+.card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 30px;
+    background-color: #ffffff;
+}
+
+h2 {
+    color: #2c3e50; /* Darker blue for headings */
+    margin-bottom: 20px;
+}
+
+.form-label {
+    color: #2c3e50; /* Consistent label color */
+}
+
+.form-control {
+    border: 2px solid #e0eaf2;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+    .form-control:focus {
+        border-color: #5dade2; /* Light blue focus */
+        box-shadow: none;
+    }
+
+.btn-primary {
+    background-color: #5dade2; /* Light blue button */
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-primary:hover {
+        background-color: #3498db; /* Darker blue on hover */
+    }
+
+    .btn-primary:active {
+        background-color: #2980b9; /* Even darker blue on click */
+        transform: translateY(1px);
+    }
+
+.text-danger {
+    font-size: 0.9em;
+}
+
+#forgot-password,
+a.asp-page,
+#resend-confirmation {
+    color: #5dade2;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+    #forgot-password:hover,
+    a.asp-page:hover,
+    #resend-confirmation:hover {
+        color: #3498db;
+        text-decoration: underline;
+    }
+
+.alert-danger {
+    font-size: 0.9em;
+}
+
+.form-check-label {
+    color: #2c3e50;
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 0 15px;
+    }
+}

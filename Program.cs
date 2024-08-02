@@ -12,12 +12,13 @@ builder.Services.AddDbContext<HospitalDbContext>(options =>
     options.UseSqlServer(con);
 });
 
-builder.Services.AddDefaultIdentity<AppUsers>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<HospitalDbContext>();
+builder.Services.AddDefaultIdentity<AppUsers>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddEntityFrameworkStores<HospitalDbContext>();
 
 // Add services to the container.
 
 builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
-   .AddNegotiate();
+    .AddNegotiate();
 
 builder.Services.AddRazorPages();
 
@@ -26,7 +27,6 @@ builder.Services.AddAuthorization(options =>
     // By default, all incoming requests will be authorized according to the default policy.
     options.FallbackPolicy = options.DefaultPolicy;
 });
-
 
 var app = builder.Build();
 
@@ -39,8 +39,16 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication(); // Ensure this is before UseAuthorization
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+// Redirect root URL to the login page
+app.MapGet("/", context =>
+{
+    context.Response.Redirect("/Pages/Account/Login");
+    return Task.CompletedTask;
+});
 
 app.Run();
