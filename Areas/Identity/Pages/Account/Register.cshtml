@@ -1,0 +1,50 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/register.css" />
+</head>
+<body>
+    <!-- Page content here -->
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-lg">
+                    <div class="card-body p-4">
+                        <h2 class="text-center mb-4">Register</h2>
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                            <div class="form-group mb-3">
+                                <label for="Email" class="form-label">E-Mail</label>
+                                <input id="Email" class="form-control" asp-for="Input.Email" />
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="Password" class="form-label">Password</label>
+                                <input id="Password" type="password" class="form-control" asp-for="Input.Password" />
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="ConfirmPassword" class="form-label">Confirm Password</label>
+                                <input id="ConfirmPassword" type="password" class="form-control" asp-for="Input.ConfirmPassword" />
+                                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                            </div>
+                            <button id="registerSubmit" type="submit" class="btn btn-primary w-100 btn-lg">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
+</body>
+</html>

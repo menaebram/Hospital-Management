@@ -1,6 +1,7 @@
 using Hospital_Management.Models;
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,8 @@ builder.Services.AddDbContext<HospitalDbContext>(options =>
     var con = builder.Configuration.GetConnectionString("con");
     options.UseSqlServer(con);
 });
+
+builder.Services.AddDefaultIdentity<AppUsers>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<HospitalDbContext>();
 
 // Add services to the container.
 
