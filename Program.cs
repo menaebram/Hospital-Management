@@ -44,6 +44,17 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseAuthorization();
+
+app.MapRazorPages();
+
+app.MapFallbackToFile("/hospital-api/index.tsx"); // Adjust path if necessary
+
+
 // Redirect root URL to the login page
 app.MapGet("/", context =>
 {
