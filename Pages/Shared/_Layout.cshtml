@@ -1,7 +1,9 @@
-﻿<head>
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Hospital_Management</title>
+    <title>@ViewData["Title"] - Hospital Management</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Hospital_Management.styles.css" asp-append-version="true" />
@@ -10,22 +12,28 @@
         .navbar {
             background-color: #007bff; /* Bootstrap primary color */
         }
+
         .navbar-brand {
             font-weight: bold;
             font-size: 1.25rem;
+            color: #f8f9fa !important;
         }
+
         .nav-link {
             color: #f8f9fa !important; /* Light color for contrast */
             font-weight: 500;
         }
-        .nav-link:hover {
-            color: #e2e6ea !important; /* Slightly lighter color on hover */
-            background-color: rgba(255, 255, 255, 0.1); /* Subtle background color on hover */
-            border-radius: 0.25rem;
-        }
+
+            .nav-link:hover {
+                color: #e2e6ea !important; /* Slightly lighter color on hover */
+                background-color: rgba(255, 255, 255, 0.1); /* Subtle background color on hover */
+                border-radius: 0.25rem;
+            }
+
         .navbar-text {
             color: #f8f9fa; /* Light color for the user greeting */
         }
+
         .navbar-toggler {
             border-color: #007bff; /* Match button border color */
         }
@@ -33,45 +41,46 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Hospital_Management</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                        <!-- Add more nav items here if needed -->
-                    </ul>
+        @if (!Context.Request.Path.StartsWithSegments("/Identity/Account/Login") &&
+        !Context.Request.Path.StartsWithSegments("/Identity/Account/Register"))
+        {
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container d-flex justify-content-between">
+                    <a class="navbar-brand" asp-area="" asp-page="/Index">Hospital Management</a>
+                    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-page="/Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-page="/Privacy">Privacy</a>
+                            </li>
+                            <!-- Add more nav items here if needed -->
+                        </ul>
+                    </div>
                     <div class="d-flex align-items-center">
                         <partial name="_LoginPartial" />
-                        <p class="nav navbar-text ml-3">Hello, @User.Identity?.Name!</p>
                     </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        }
     </header>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
+        </main>
+    </div>
 
-            <footer class="border-top footer text-muted">
-                <div class="container">
-                    &copy; 2024 - Hospital_Management - <a asp-area="" asp-page="/Privacy">Privacy</a>
-                </div>
-            </footer>
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - Hospital Management - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
 
-            <script src="~/lib/jquery/dist/jquery.min.js"></script>
-            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-            <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
 
-            @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
