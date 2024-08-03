@@ -5,6 +5,21 @@ using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+var provider = builder.Services.BuildServiceProvider();
+var configuration = provider.GetRequiredService<IConfiguration>();
+
+builder.Services.AddCors(options =>
+{
+    var frontendURL = configuration.GetValue<string>("frontend_url");
+
+    options.AddDefaultPolicy(builder =>
+    {
+        Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder corsPolicyBuilder = builder.WithOrigins(frontendURL).AllowAnyMethod().AllowAnyHeader();
+    });
+});
+
+
 // DbContext
 builder.Services.AddDbContext<HospitalDbContext>(options =>
 {
@@ -36,23 +51,15 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Error");
 }
 app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseAuthentication(); // Ensure this is before UseAuthorization
-app.UseAuthorization();
-
 app.MapRazorPages();
 
 app.UseStaticFiles();
 
+
 app.UseRouting();
-
+app.UseCors();
+app.UseAuthentication(); // Ensure this is before UseAuthorization
 app.UseAuthorization();
-
-app.MapRazorPages();
-
-app.MapFallbackToFile("/hospital-api/index.tsx"); // Adjust path if necessary
 
 
 // Redirect root URL to the login page
