@@ -1,57 +1,77 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
+﻿<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Hospital Management</title>
-    <link rel="stylesheet" href="~/css/site.css" />
+    <title>@ViewData["Title"] - Hospital_Management</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Hospital_Management.styles.css" asp-append-version="true" />
+    <style>
+        /* Custom styles for navigation */
+        .navbar {
+            background-color: #007bff; /* Bootstrap primary color */
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+        .nav-link {
+            color: #f8f9fa !important; /* Light color for contrast */
+            font-weight: 500;
+        }
+        .nav-link:hover {
+            color: #e2e6ea !important; /* Slightly lighter color on hover */
+            background-color: rgba(255, 255, 255, 0.1); /* Subtle background color on hover */
+            border-radius: 0.25rem;
+        }
+        .navbar-text {
+            color: #f8f9fa; /* Light color for the user greeting */
+        }
+        .navbar-toggler {
+            border-color: #007bff; /* Match button border color */
+        }
+    </style>
 </head>
 <body>
-    @{
-        var isLoginPage = ViewContext.RouteData.Values["controller"]?.ToString() == "Account" &&
-        ViewContext.RouteData.Values["action"]?.ToString() == "Login";
-    }
-
-    @if (!isLoginPage)
-    {
-        <nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Hospital Management</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">Hospital_Management</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+                        aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-area="" asp-page="/Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
+                        <!-- Add more nav items here if needed -->
                     </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+                    <div class="d-flex align-items-center">
+                        <partial name="_LoginPartial" />
+                        <p class="nav navbar-text ml-3">Hello, @User.Identity?.Name!</p>
+                    </div>
                 </div>
             </div>
         </nav>
-    }
-
+    </header>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - Hospital Management - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+            <footer class="border-top footer text-muted">
+                <div class="container">
+                    &copy; 2024 - Hospital_Management - <a asp-area="" asp-page="/Privacy">Privacy</a>
+                </div>
+            </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    @RenderSection("Scripts", required: false)
+            <script src="~/lib/jquery/dist/jquery.min.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>
+
+            @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
